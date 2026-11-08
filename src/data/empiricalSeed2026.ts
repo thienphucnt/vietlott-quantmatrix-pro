@@ -145,15 +145,15 @@ export const GAME_CONFIGS: Record<GameType, GameConfig> = {
     gameType: "6/45",
     name: "Mega 6/45",
     vietnameseName: "Vietlott Mega 6/45",
-    latestDrawId: "01585",
-    latestDrawDate: "2026-11-06",
-    nextDrawId: "01586",
+    latestDrawId: "01586",
+    latestDrawDate: "2026-11-08",
+    nextDrawId: "01587",
     maxNum: 45,
     midPoint: 22,
     totalCombinations: 8145060,
     minJackpot1Vnd: 12_000_000_000,
-    currentJackpot1Vnd: 13_783_788_500,
-    seedMultiplier: 1.15,
+    currentJackpot1Vnd: 15_740_836_000,
+    seedMultiplier: 1.31,
     meanSum: 138.0,
     stdDevSum: 29.95,
     minPossibleSum: 21,
@@ -169,26 +169,26 @@ export const GAME_CONFIGS: Record<GameType, GameConfig> = {
     cutoffTimeICT: "17:30",
     broadcastWindowICT: "18:00–18:30",
     hotPool: [
-      40, 38, 36, 39, 9, 20, 14, 34, 7, 45, 22, 11, 37, 30, 10, 41, 1, 44, 2, 5, 17, 16,
+      37, 1, 38, 36, 20, 45, 14, 2, 40, 22, 39, 10, 7, 9, 41, 23, 11, 34, 44, 30, 35, 4,
     ],
     hotWeights: [
-      153, 149, 139, 138, 128, 128, 122, 122, 121, 121, 117, 116, 115, 114, 107, 106, 98, 95, 94, 90, 90, 89,
+      161, 158, 155, 143, 139, 138, 137, 136, 133, 121, 118, 116, 104, 99, 99, 97, 94, 94, 93, 92, 82, 79,
     ],
-    coldOverduePool: [24, 16, 19, 29, 26, 12, 23, 43, 6, 3, 15, 35],
-    masterCorePool: [40, 38, 36, 39, 9, 20, 14, 34, 7, 45, 22, 11, 37, 30],
+    coldOverduePool: [27, 24, 43, 44, 26, 29, 35, 6, 16, 19, 31, 3],
+    masterCorePool: [37, 1, 38, 36, 20, 45, 14, 2, 40, 22, 39, 10, 7, 9],
     learnedWeights: {
-      shortSurge: 0.1422,
-      lagRepeat: 0.1876,
-      companionLift: 0.1613,
-      multiHorizon: 0.1138,
-      survivalRebound: 0.112,
-      neighborMagnet: 0.0965,
-      bridgeMidpoint: 0.0922,
-      decadeRebound: 0.0944,
+      shortSurge: 0.1493,
+      lagRepeat: 0.1906,
+      companionLift: 0.1617,
+      multiHorizon: 0.1121,
+      survivalRebound: 0.1019,
+      neighborMagnet: 0.0939,
+      bridgeMidpoint: 0.0943,
+      decadeRebound: 0.0963,
     },
     recentDrawsTop2: [
+      [1, 2, 14, 20, 23, 36], // #01586 (2026-11-08)
       [1, 10, 37, 38, 39, 45], // #01585 (2026-11-06)
-      [7, 14, 20, 30, 34, 40], // #01584 (2026-11-04)
     ],
   },
 };
@@ -596,6 +596,20 @@ export const POWER_655_SEED_DRAWS: HistoricalDraw[] = [
 ];
 
 export const MEGA_645_SEED_DRAWS: HistoricalDraw[] = [
+  {
+    id: "01586",
+    date: "2026-11-08",
+    weekday: "Sunday",
+    gameType: "6/45",
+    numbers: [1, 2, 14, 20, 23, 36],
+    sum: 96,
+    oddEven: "2O-4E",
+    lowHigh: "4L-2H",
+    consecPairs: 1,
+    consecDetail: "01-02",
+    jackpot1Vnd: 15_740_836_000,
+    jp1Winners: 0,
+  },
   {
     id: "01585",
     date: "2026-11-06",
