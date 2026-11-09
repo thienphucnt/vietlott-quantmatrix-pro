@@ -1027,9 +1027,8 @@ export function buildDynamicGameConfigForDate(
   // Compute live currentJackpot1Vnd and currentJackpot2Vnd from newestDraw
   let currentJackpot1Vnd = newestDraw.jackpot1Vnd || baseCfg.currentJackpot1Vnd;
   if (
-    newestDraw.jp1Winners &&
-    newestDraw.jp1Winners > 0 &&
-    currentJackpot1Vnd > baseCfg.minJackpot1Vnd * 1.3
+    (newestDraw.jp1Winners && newestDraw.jp1Winners > 0) ||
+    currentJackpot1Vnd < baseCfg.minJackpot1Vnd
   ) {
     currentJackpot1Vnd = baseCfg.minJackpot1Vnd;
   }
@@ -1040,10 +1039,8 @@ export function buildDynamicGameConfigForDate(
       : undefined;
   if (
     gameType === "6/55" &&
-    newestDraw.jp2Winners &&
-    newestDraw.jp2Winners > 0 &&
-    currentJackpot2Vnd &&
-    currentJackpot2Vnd > 3_500_000_000
+    ((newestDraw.jp2Winners && newestDraw.jp2Winners > 0) ||
+      (currentJackpot2Vnd && currentJackpot2Vnd < 3_000_000_000))
   ) {
     currentJackpot2Vnd = 3_000_000_000;
   }

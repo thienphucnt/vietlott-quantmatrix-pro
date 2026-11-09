@@ -511,7 +511,10 @@ function updateGameConfigBlockInSeed(seedContent, gameKey, evolved, jpInfo) {
     jpInfo?.drawId === latestId && jpInfo?.jackpot1Vnd
       ? jpInfo.jackpot1Vnd
       : undefined;
-  if (curJp1 && jpInfo?.jp1Winners && jpInfo.jp1Winners > 0 && curJp1 > minJp1 * 1.3) {
+  if (
+    curJp1 &&
+    ((jpInfo?.jp1Winners && jpInfo.jp1Winners > 0) || curJp1 < minJp1)
+  ) {
     curJp1 = minJp1;
   }
 
@@ -712,25 +715,25 @@ async function main() {
     }
   }
 
-  // Write Cloud Retrospective Audit Log
+  // Write Deterministic Cloud Retrospective Audit Log (only changes when draw ID or jackpot updates)
   const ictNow = new Date().toLocaleString("sv-SE", {
     timeZone: "Asia/Ho_Chi_Minh",
   });
   const logMd = `# Vietlott QuantMatrix Pro — Autonomous Cloud Retrospective & Evolution Log
 
-- **Last Cloud Evolution Run (ICT)**: \`${ictNow} (Asia/Ho_Chi_Minh)\`
+- **Latest Settled Draw Pair**: \`Power 6/55 #${powerEvolved.latest.id} (${powerEvolved.latest.date})\` & \`Mega 6/45 #${megaEvolved.latest.id} (${megaEvolved.latest.date})\`
 - **Engine Architecture**: \`v3.0 8-Factor Multiplicative-Weights Hedge + t=3 Abbreviated Combinatorial Wheel (5 × 6-Number Standard Tickets)\`
 
 ## 1. Latest Power 6/55 State (\`#${powerEvolved.latest.id}\` — \`${powerEvolved.latest.date}\`)
 - **Winning Numbers**: \`[${powerEvolved.latest.main.map((n) => String(n).padStart(2, "0")).join(", ")}]\` | **JP2 Special Bonus**: \`${String(powerEvolved.latest.bonus ?? 0).padStart(2, "0")}\`
-- **Live Jackpot 1**: \`${(powerJp?.jackpot1Vnd ?? 42432448800).toLocaleString("en-US")} VND\` (\`${powerJp?.jp1Winners ?? 0}\` winners)
-- **Live Jackpot 2**: \`${(powerJp?.jackpot2Vnd ?? 5618647400).toLocaleString("en-US")} VND\` (\`${powerJp?.jp2Winners ?? 0}\` winners)
+- **Settled Draw Jackpot 1**: \`${(powerJp?.jackpot1Vnd ?? 30000000000).toLocaleString("en-US")} VND\` (\`${powerJp?.jp1Winners ?? 0}\` winners)
+- **Settled Draw Jackpot 2**: \`${(powerJp?.jackpot2Vnd ?? 30000000000).toLocaleString("en-US")} VND\` (\`${powerJp?.jp2Winners ?? 0}\` winners)
 - **Recalibrated 14-Ball Master Wheel Pool (for Draw \`#${String(Number(powerEvolved.latest.id) + 1).padStart(5, "0")}\`)**: \`[${powerEvolved.masterCorePool.map((n) => String(n).padStart(2, "0")).join(", ")}]\`
 - **Self-Learned 8-Factor Weights**: \`${JSON.stringify(powerEvolved.learnedWeights)}\`
 
 ## 2. Latest Mega 6/45 State (\`#${megaEvolved.latest.id}\` — \`${megaEvolved.latest.date}\`)
 - **Winning Numbers**: \`[${megaEvolved.latest.main.map((n) => String(n).padStart(2, "0")).join(", ")}]\`
-- **Live Jackpot**: \`${(megaJp?.jackpot1Vnd ?? 12000000000).toLocaleString("en-US")} VND\` (\`${megaJp?.jp1Winners ?? 0}\` winners)
+- **Settled Draw Jackpot**: \`${(megaJp?.jackpot1Vnd ?? 12000000000).toLocaleString("en-US")} VND\` (\`${megaJp?.jp1Winners ?? 0}\` winners)
 - **Recalibrated 14-Ball Master Wheel Pool (for Draw \`#${String(Number(megaEvolved.latest.id) + 1).padStart(5, "0")}\`)**: \`[${megaEvolved.masterCorePool.map((n) => String(n).padStart(2, "0")).join(", ")}]\`
 - **Self-Learned 8-Factor Weights**: \`${JSON.stringify(megaEvolved.learnedWeights)}\`
 `;
