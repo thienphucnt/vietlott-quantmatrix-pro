@@ -209,7 +209,7 @@ export const POWER_655_SEED_DRAWS: HistoricalDraw[] = [
     lowHigh: "4L-2H",
     consecPairs: 1,
     consecDetail: "19-20",
-    jackpot1Vnd: 22_636_747_050,
+    jackpot1Vnd: 45_273_494_100,
     jackpot2Vnd: 5_934_319_100,
     jp1Winners: 2,
     jp2Winners: 0,

@@ -1,6 +1,9 @@
 name: Daily Vietlott QuantMatrix Cloud Auto-Evolver
 
 on:
+  push:
+    branches:
+      - master
   schedule:
     # 19:10 ICT (12:10 UTC) - Primary post-draw cloud sync & retrospective evolution
     - cron: "10 12 * * *"
@@ -52,7 +55,7 @@ jobs:
           git add src/data/empiricalSeed2026.ts src/app/page.tsx src/components/ExecutiveHeader.tsx src/components/RollingForecastMatrix.tsx RETROSPECTIVE_CLOUD_LOG.md
           if ! git diff --cached --quiet; then
             LATEST_INFO=$(node -e 'const fs=require("fs"); const s=fs.readFileSync("src/data/empiricalSeed2026.ts","utf8"); const p=s.match(/latestDrawId:\s*"(\d+)"/)?.[1]; console.log(p || "latest");')
-            git commit -m "chore(cloud-evolver): autonomous 19:00 ICT draw sync #${LATEST_INFO}, retrospective & 8-factor weight evolution"
+            git commit -m "chore(cloud-evolver): autonomous 19:00 ICT draw sync #${LATEST_INFO}, retrospective & 8-factor weight evolution [skip ci]"
             git push origin master
           else
             echo "No new draw changes to commit on master."
@@ -67,6 +70,8 @@ jobs:
           touch out/.nojekyll
 
       - name: Deploy Static Bundle to gh-pages Branch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           cd out
           git init
@@ -75,4 +80,4 @@ jobs:
           git checkout -b gh-pages
           git add -A
           git commit -m "deploy(cloud-evolver): automated daily cloud build $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
-          git push -f "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" gh-pages
+          git push -f "https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git" gh-pages
