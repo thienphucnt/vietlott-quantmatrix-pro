@@ -1,0 +1,4 @@
+:HL["/vietlott-quantmatrix-pro/_next/static/chunks/1y30dox1z2uwm.css","style"]
+2:[["children",{"s":"__PAGE__","h":160}]]
+1:[["children",{"s":"/_not-found","h":96,"c":"$Q2"}]]
+0:{"b":"XGbkhc_yXWZeAmyDqN_rE","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
